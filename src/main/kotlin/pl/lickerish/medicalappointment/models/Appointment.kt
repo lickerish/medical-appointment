@@ -1,0 +1,13 @@
+package pl.lickerish.medicalappointment.models
+
+import java.time.LocalDate
+import java.time.LocalTime
+
+data class Appointment(val id: Long,
+                       val date: LocalDate,
+                       val time: LocalTime,
+                       val place: String,
+                       val doctor: Doctor,
+                       val patient: Patient) {
+
+}
