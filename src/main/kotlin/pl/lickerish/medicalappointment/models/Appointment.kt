@@ -10,6 +10,4 @@ data class Appointment(@Id
                        val time: LocalTime,
                        val place: String,
                        val doctor: Doctor,
-                       val patient: Patient) {
-
-}
+                       val patient: Patient)
