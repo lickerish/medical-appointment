@@ -1,5 +1,6 @@
 package pl.lickerish.medicalappointment.controllers
 
+import org.springframework.http.HttpStatus
 import org.springframework.web.bind.annotation.*
 import pl.lickerish.medicalappointment.models.Patient
 import pl.lickerish.medicalappointment.services.PatientService
@@ -10,16 +11,20 @@ import java.util.*
 class PatientController(val patientService: PatientService) {
 
     @GetMapping
+    @ResponseStatus(HttpStatus.OK)
     fun getAll() = this.patientService.findAll()
 
     @GetMapping("/{id}")
+    @ResponseStatus(HttpStatus.OK)
     fun getById(@PathVariable id: Long): Optional<Patient> = this.patientService.findById(id)
 
     @PostMapping
-    fun insert(patient: Patient): Patient = this.patientService.create(patient)
+    @ResponseStatus(HttpStatus.CREATED)
+    fun insert(@RequestBody patient: Patient): Patient = this.patientService.create(patient)
 
     @PutMapping("/{id}")
-    fun update(@PathVariable id: Long, patient: Patient): Patient = this.patientService.update(patient, id)
+    @ResponseStatus(HttpStatus.OK)
+    fun update(@PathVariable id: Long, @RequestBody patient: Patient): Patient = this.patientService.update(patient, id)
 
     @DeleteMapping("/{id}")
     fun delete(@PathVariable id: Long) = this.patientService.delete(id)
