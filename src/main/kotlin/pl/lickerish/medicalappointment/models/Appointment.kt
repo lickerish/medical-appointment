@@ -1,15 +1,24 @@
 package pl.lickerish.medicalappointment.models
 
+import com.fasterxml.jackson.annotation.JsonFormat
 import java.time.LocalDate
 import java.time.LocalTime
-import javax.persistence.Id
+import javax.persistence.*
 
+@Entity
+@Table(name = "appointment")
 data class Appointment(@Id
-                       val id: Long,
-                       val date: LocalDate,
-                       val time: LocalTime,
+                       @GeneratedValue(strategy = GenerationType.IDENTITY)
+                       @Column(name = "id", updatable = false, nullable = false)
+                       val id: Long?,
+                       @JsonFormat(pattern = "dd::MM::yyyy")
+                       val date: LocalDate? = null,
+                       @JsonFormat(pattern = "KK:mm a")
+                       val time: LocalTime? = null,
                        val place: String,
-                       val doctor: Doctor,
-                       val patient: Patient) {
+                       @ManyToOne
+                       val doctor: Doctor? = null,
+                       @ManyToOne
+                       val patient: Patient? = null) {
 
 }
