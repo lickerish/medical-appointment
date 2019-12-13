@@ -14,18 +14,12 @@ class AppointmentController(val appointmentService: AppointmentService) {
     @ResponseStatus(HttpStatus.OK)
     fun getAll(): List<Appointment> = this.appointmentService.findAll()
 
-//    // Not needed in spec -> done for test purposes
-//    @GetMapping("/{id}")
-//    fun getById(@PathVariable id: Long): Optional<Appointment> = this.appointmentService.findById(id)
-
-    @GetMapping("/{id}")
+    @GetMapping("/{patientId}")
     @ResponseStatus(HttpStatus.OK)
-    fun getAppointmentsByPatient(@PathVariable id: Long): List<Appointment> {
-        return this.appointmentService.findByPatientId(id)
+    fun getAppointmentsByPatient(@PathVariable patientId: Long): List<Appointment> {
+        return this.appointmentService.findByPatientId(patientId)
     }
 
-    // #ToClarify - umówienie wizyty - najpierw tworzysz pacjenta i doktora, a później ich id przekazujesz aby umówić wizytę
-    // One post for all or 3 posts
     @PostMapping
     fun insert(@RequestBody appointmentDto: AppointmentDto): Appointment = this.appointmentService.create(appointmentDto)
 
