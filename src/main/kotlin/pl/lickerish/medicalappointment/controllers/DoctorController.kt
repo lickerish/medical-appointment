@@ -24,7 +24,7 @@ class DoctorController(val doctorService: DoctorService) {
 
     @PutMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
-    fun update(@PathVariable id: Long,@RequestBody doctor: Doctor): Doctor = this.doctorService.update(doctor, id)
+    fun update(@PathVariable id: Long, @RequestBody doctor: Doctor): Doctor = this.doctorService.update(doctor, id)
 
     @DeleteMapping("/{id}")
     fun delete(@PathVariable id: Long) = this.doctorService.delete(id)

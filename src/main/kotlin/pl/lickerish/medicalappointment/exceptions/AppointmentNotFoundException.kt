@@ -1,4 +1,4 @@
 package pl.lickerish.medicalappointment.exceptions
 
-class AppointmentNotFoundException(message:String): Exception(message)  {
+class AppointmentNotFoundException(message: String) : Exception(message) {
 }
