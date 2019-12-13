@@ -17,8 +17,6 @@ class AppointmentService(val appointmentRepository: AppointmentRepository,
                          val patientRepository: PatientRepository) {
     fun findAll(): List<Appointment> = this.appointmentRepository.findAll()
 
-    fun findById(id: Long): Optional<Appointment> = this.appointmentRepository.findById(id)
-
     fun findByPatientId(id: Long): List<Appointment> {
         return appointmentRepository.findAppointmentsByPatientId(id)
     }
@@ -27,15 +25,7 @@ class AppointmentService(val appointmentRepository: AppointmentRepository,
         var doctor: Optional<Doctor> = doctorRepository.findById(appointmentDto.doctorId)
         var patient: Optional<Patient> = patientRepository.findById(appointmentDto.patientId)
         val appointment = Appointment(null, appointmentDto.date, appointmentDto.time, appointmentDto.place, doctor.get(), patient.get())
-        val set: Set<Appointment> = setOf(appointment)
-        doctor.get().appointments = set
-        patient.get().appointments = set
-        this.appointmentRepository.save(appointment)
-
-        this.doctorRepository.save(doctor.get())
-        this.patientRepository.save(patient.get())
-        return appointment
-
+        return this.appointmentRepository.save(appointment)
     }
 
     fun updateAppointmentTime(appointment: Appointment, id: Long): Appointment {
