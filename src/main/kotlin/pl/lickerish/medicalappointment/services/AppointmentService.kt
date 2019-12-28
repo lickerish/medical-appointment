@@ -1,7 +1,7 @@
 package pl.lickerish.medicalappointment.services
 
 import org.springframework.stereotype.Service
-import pl.lickerish.medicalappointment.dto.AppointmentDto
+import pl.lickerish.medicalappointment.dto.AppointmentDTO
 import pl.lickerish.medicalappointment.exceptions.AppointmentNotFoundException
 import pl.lickerish.medicalappointment.models.Appointment
 import pl.lickerish.medicalappointment.models.Doctor
@@ -21,16 +21,16 @@ class AppointmentService(val appointmentRepository: AppointmentRepository,
         return appointmentRepository.findAppointmentsByPatientId(id)
     }
 
-    fun create(appointmentDto: AppointmentDto): Appointment {
-        var doctor: Optional<Doctor> = doctorRepository.findById(appointmentDto.doctorId)
-        var patient: Optional<Patient> = patientRepository.findById(appointmentDto.patientId)
-        val appointment = Appointment(null, appointmentDto.date, appointmentDto.time, appointmentDto.place, doctor.get(), patient.get())
+    fun create(appointmentDTO: AppointmentDTO): Appointment {
+        val doctor: Optional<Doctor> = doctorRepository.findById(appointmentDTO.doctorId)
+        val patient: Optional<Patient> = patientRepository.findById(appointmentDTO.patientId)
+        val appointment = Appointment(null, appointmentDTO.date, appointmentDTO.time, appointmentDTO.place, doctor.get(), patient.get())
         return this.appointmentRepository.save(appointment)
     }
 
-    fun updateAppointmentTime(appointment: Appointment, id: Long): Appointment {
-        return this.appointmentRepository.findById(id).map { existingAppointment ->
-            val updatedAppointment = existingAppointment.copy(
+    fun updateAppointmentTime(appointment: AppointmentDTO, id: Long): Appointment {
+        return this.appointmentRepository.findById(id).map {
+            val updatedAppointment = it.copy(
                     time = appointment.time)
             appointmentRepository.save(updatedAppointment)
         }.orElseThrow { throw AppointmentNotFoundException("Appointment not found. Nothing to update") }
