@@ -7,5 +7,5 @@ import org.springframework.boot.runApplication
 class MedicalAppointmentApplication
 
 fun main(args: Array<String>) {
-	runApplication<MedicalAppointmentApplication>(*args)
+    runApplication<MedicalAppointmentApplication>(*args)
 }

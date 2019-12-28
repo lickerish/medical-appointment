@@ -4,7 +4,7 @@ import com.fasterxml.jackson.annotation.JsonFormat
 import java.time.LocalDate
 import java.time.LocalTime
 
-data class AppointmentDto(
+data class AppointmentDTO(
         @JsonFormat(pattern = "dd::MM::yyyy")
         val date: LocalDate,
         @JsonFormat(pattern = "KK:mm a")
