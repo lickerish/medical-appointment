@@ -5,5 +5,4 @@ import org.springframework.stereotype.Repository
 import pl.lickerish.medicalappointment.models.Patient
 
 @Repository
-interface PatientRepository : JpaRepository<Patient, Long> {
-}
+interface PatientRepository : JpaRepository<Patient, Long>
