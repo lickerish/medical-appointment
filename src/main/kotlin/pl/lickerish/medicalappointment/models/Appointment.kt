@@ -29,6 +29,4 @@ data class Appointment(@Id
                        @ManyToOne(fetch = FetchType.LAZY, cascade = [CascadeType.ALL])
                        @JoinColumn(name = "patientId")
                        @OnDelete(action = OnDeleteAction.CASCADE)
-                       val patient: Patient) {
-
-}
+                       val patient: Patient)
