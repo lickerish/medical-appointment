@@ -1,5 +1,7 @@
 package pl.lickerish.medicalappointment.services
 
+import org.springframework.data.domain.Example
+import org.springframework.data.domain.ExampleMatcher
 import org.springframework.stereotype.Service
 import pl.lickerish.medicalappointment.dto.AppointmentDTO
 import pl.lickerish.medicalappointment.exceptions.AppointmentNotFoundException
@@ -25,7 +27,10 @@ class AppointmentService(val appointmentRepository: AppointmentRepository,
         val doctor: Optional<Doctor> = doctorRepository.findById(appointmentDTO.doctorId)
         val patient: Optional<Patient> = patientRepository.findById(appointmentDTO.patientId)
         val appointment = Appointment(null, appointmentDTO.date, appointmentDTO.time, appointmentDTO.place, doctor.get(), patient.get())
-        return this.appointmentRepository.save(appointment)
+        when (checkIfExistAlreadyIgnoringIdPath(appointment)) {
+            true -> throw Exception("Appointment is already created.")
+            false -> return this.appointmentRepository.save(appointment)
+        }
     }
 
     fun updateAppointmentTime(appointment: AppointmentDTO, id: Long): Appointment {
@@ -37,4 +42,10 @@ class AppointmentService(val appointmentRepository: AppointmentRepository,
     }
 
     fun delete(id: Long) = this.appointmentRepository.deleteById(id)
+
+    fun checkIfExistAlreadyIgnoringIdPath(appointment: Appointment): Boolean {
+        val modelMatcher = ExampleMatcher.matching().withIgnorePaths("id")
+        val example = Example.of(appointment, modelMatcher)
+        return appointmentRepository.exists(example)
+    }
 }
