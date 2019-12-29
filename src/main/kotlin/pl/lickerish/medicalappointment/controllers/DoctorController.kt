@@ -28,5 +28,6 @@ class DoctorController(val doctorService: DoctorService) {
     fun update(@PathVariable id: Long, @RequestBody doctor: DoctorDTO): Doctor = this.doctorService.update(doctor, id)
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     fun delete(@PathVariable id: Long) = this.doctorService.delete(id)
 }
