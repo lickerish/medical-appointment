@@ -20,13 +20,15 @@ class AppointmentController(val appointmentService: AppointmentService) {
     }
 
     @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
     fun insert(@RequestBody appointmentDTO: AppointmentDTO): Appointment = this.appointmentService.create(appointmentDTO)
 
-    @PatchMapping("/{id}") //
+    @PatchMapping("/{id}")
     @ResponseStatus(HttpStatus.OK)
     fun updateTime(@PathVariable id: Long, @RequestBody appointment: AppointmentDTO): Appointment = this.appointmentService.updateAppointmentTime(appointment, id)
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     fun delete(@PathVariable id: Long) = this.appointmentService.delete(id)
 }
 

@@ -27,5 +27,6 @@ class AddressController(val addressService: AddressService) {
     fun update(@PathVariable id: Long, @RequestBody address: AddressDTO): Address = this.addressService.update(address, id)
 
     @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
     fun delete(@PathVariable id: Long) = this.addressService.delete(id)
 }
