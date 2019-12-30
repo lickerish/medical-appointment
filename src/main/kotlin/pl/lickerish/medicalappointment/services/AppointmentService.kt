@@ -43,7 +43,16 @@ class AppointmentService(val appointmentRepository: AppointmentRepository,
 
     fun delete(id: Long) = this.appointmentRepository.deleteById(id)
 
-    fun checkIfExistAlreadyIgnoringIdPath(appointment: Appointment): Boolean {
+    fun getAppointments(id: Long?):List<Appointment> {
+        return if(id == null) {
+            appointmentRepository.findAll()
+        } else {
+            appointmentRepository.findAppointmentsByPatientId(id)
+        }
+
+    }
+
+    private fun checkIfExistAlreadyIgnoringIdPath(appointment: Appointment): Boolean {
         val modelMatcher = ExampleMatcher.matching().withIgnorePaths("id")
         val example = Example.of(appointment, modelMatcher)
         return appointmentRepository.exists(example)

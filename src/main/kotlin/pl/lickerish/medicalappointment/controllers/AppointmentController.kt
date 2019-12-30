@@ -10,13 +10,10 @@ import pl.lickerish.medicalappointment.services.AppointmentService
 @RequestMapping("/appointments")
 class AppointmentController(val appointmentService: AppointmentService) {
 
+    @ResponseStatus(HttpStatus.OK)
     @GetMapping
-    @ResponseStatus(HttpStatus.OK)
-    fun getAll(): List<Appointment> = this.appointmentService.findAll()
-
-    @ResponseStatus(HttpStatus.OK)
-    fun getAppointmentsByPatient(@RequestParam("patientId") patientId: Long): List<Appointment> {
-        return this.appointmentService.findByPatientId(patientId)
+    fun getAppointments(@RequestParam("patientId", required = false) patientId: Long?): List<Appointment> {
+        return this.appointmentService.getAppointments(patientId)
     }
 
     @PostMapping
