@@ -14,6 +14,7 @@ class AppointmentController(val appointmentService: AppointmentService) {
     @ResponseStatus(HttpStatus.OK)
     fun getAll(): List<Appointment> = this.appointmentService.findAll()
 
+    @GetMapping
     @ResponseStatus(HttpStatus.OK)
     fun getAppointmentsByPatient(@RequestParam("patientId") patientId: Long): List<Appointment> {
         return this.appointmentService.findByPatientId(patientId)
