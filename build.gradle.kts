@@ -31,12 +31,14 @@ dependencies {
 	}
 	implementation("io.springfox:springfox-swagger2:2.9.2")
 	implementation("io.springfox:springfox-swagger-ui:2.9.2")
+	testImplementation("org.junit.jupiter:junit-jupiter-engine:5.2.0")
+	testImplementation("org.mockito:mockito-junit-jupiter:2.23.0")
 }
 
-// Uncomment to run tests 
-//tasks.withType<Test> {
-//	useJUnitPlatform()
-//}
+tasks.withType<Test> {
+	useJUnitPlatform()
+}
+
 
 tasks.withType<KotlinCompile> {
 	kotlinOptions {
