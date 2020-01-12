@@ -1,4 +1,4 @@
-# Spring Boot Application- > Medical Apointment Management
+# Spring Boot App -> Medical Apointment
 
 App allows making an appointment to the doctor.
 Made using Kotlin and Spring Boot.
@@ -9,13 +9,13 @@ Made using Kotlin and Spring Boot.
 * 	[Kotlin](https://kotlinlang.org/)
 * 	[Spring Boot](https://spring.io/projects/spring-boot)
 * 	[H2](https://www.h2database.com/html/main.html)
-* 	[git](https://git-scm.com/)
+* 	[Git](https://git-scm.com/)
 * 	[Swagger](https://swagger.io/)
 
 ## Inobvious plugins
 
 * 	[NoArg Compiler Plugin](https://kotlinlang.org/docs/reference/compiler-plugins.html)
-```Groovy
+```shell
   id("org.jetbrains.kotlin.plugin.noarg") version "1.3.61"
 ```
 
